@@ -1,0 +1,20 @@
+#ddev-generated
+services:
+  test-database:
+    image: postgres:${POSTGRES_VERSION:-14}-alpine
+    ports:
+      - "5433:5432"
+    environment:.ddev/docker-compose.postgresql-test.yaml
+      POSTGRES_DB: db-test
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: db-test
+      POSTGRES_USER: db-test
+    container_name: "ddev-${DDEV_SITENAME}-test-database"
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: ${DDEV_APPROOT}
+    expose:
+      - "9999"
+    networks:
+      ddev_default: null
+      default: null
